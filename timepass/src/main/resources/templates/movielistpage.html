@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Movie Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Movie Directory</h3>
+	<hr>
+	
+	<!-- Add a button -->
+	<a th:href="@{/addNewMovie}"
+		class="btn btn-primary btn-sm mb-3">
+		Add Movie
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Movie Name</th>
+				<th>Release Date</th>
+				<th>Movie Description</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempMovies : ${movies}">
+			
+				<td th:text="${tempMovies.movieName}" />	
+				<td th:text="${tempMovies.releaseDate}" />	
+				<td th:text="${tempMovies.mvDescription}" />
+				
+				<td>
+					<!-- Add "update" button/link -->
+					<a th:href="@{/movies/showFormForUpdate(movieId=${tempMovies.movieID})}"
+					   class="btn btn-info btn-sm">
+						Update
+					</a>
+					
+					<!-- Add "delete" button/link -->					
+					<a th:href="@{/movies/delete(movieId=${tempMovies.movieID})}"
+					   class="btn btn-danger btn-sm"
+					   onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+						Delete
+					</a>
+					
+				</td>
+				
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+	<a th:href="@{/downloadMovies}"
+		class="btn btn-primary btn-sm mb-3">
+		Download
+	</a>
+	
+</div>
+	
+</body>
+</html>
+
+
+
